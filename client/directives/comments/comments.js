@@ -20,7 +20,7 @@ angular.module('Reddit').directive('mbComment', function() {
             }
             scope.toggleComments = function(post) {
               this.post.showComments = !this.post.showComments;
-              console.log(this.post.showComments)
+              console.log('post.showCommments===',this.post.showComments)
             }
         }
     }
