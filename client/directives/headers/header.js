@@ -3,7 +3,7 @@ angular.module('Reddit')
   return {
         restrict: 'EA',
         replace: true,
-        templateUrl: 'header.html',
+        templateUrl: '/directives/headers/header.html',
         // scope: {
         //   orderVal: '=',
         //   searchText: '='

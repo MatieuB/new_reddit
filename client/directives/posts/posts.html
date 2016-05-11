@@ -1,0 +1,46 @@
+<article class="container">
+  <p ng-bind="view.searchText"></p>
+  <div ng-repeat="post in view.posts | orderBy: orderVal | filter:searchText" class="panel panel-default row col-md-12">
+
+    <a href="#" class="thumbnail col-md-3">
+      <img ng-src="{{post.image}}" alt="hg">
+    </a>
+    <div class="col-md-9">
+      <p class="text-right">{{post.author}}</p>
+       <span><h4>{{post.title}} | <span ng-class="voteClass(post)">{{post.vote}}</span>
+      <span ng-click="changeVotes(post,1)"><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+      <span ng-click="changeVotes(post,-1)"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+      </h4</span>
+      <p>{{post.message}}</p>
+      <mb-comment></mb-comment>
+    </div>
+  </div>
+  <div id="postModal" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myMedModalLabel">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content  col-md-10">
+        <h3 class="text-center">New Post</h3>
+
+        <form ng-submit="submitPost()" class="form-group" name="postForm" action="#" class="text-center">
+
+          <label for="title">Title</label>
+          <input type="text" class="form-control" ng-class="{'has-error': checkForError(postForm.title), 'has-success': postForm.title.$valid}" id="title" name="title" ng-model="newPost.title" ng-minlength=3 ng-maxlength=20 required>
+          <p ng-show="checkForError(postForm.title)" class="help-block">You fergot yer title</p>
+
+          <label for="image">Image URL</label>
+          <input type="text" class="form-control" ng-class="{'has-error': checkForError(postForm.image), 'has-success': postForm.image.$valid }" id="image" name="image" ng-model="newPost.image" required>
+          <p ng-show="checkForError(postForm.image)" class="help-block">Better put in a perdy little picture</p>
+
+          <label for="author">Author</label>
+          <input type="text" class="form-control" ng-class="{'has-error': checkForError(postForm.author), 'has-success': postForm.author.$valid }" id="author" name="author" ng-model="newPost.author" ng-minlength=3 ng-maxlength=20 required>
+          <p ng-show="checkForError(postForm.author)" class="help-block">What's YOUR name?</p>
+
+          <label for="message">Message</label>
+          <textarea type="text" class="form-control" ng-class="{'has-error': checkForError(postForm.message), 'has-success': postForm.message.$valid }" id="message" name="message" ng-model="newPost.message" required></textarea>
+          <p ng-show="checkForError(postForm.message)" class="help-block">You're being stingy with the details</p>
+
+          <input type="submit">
+        </form>
+      </div>
+    </div>
+  </div>
+</article>

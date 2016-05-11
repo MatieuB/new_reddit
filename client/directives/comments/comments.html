@@ -1,0 +1,70 @@
+<article class="comments">
+  <h5>COMMENTS |
+    <span ng-click="toggleComments()">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+    </span> |
+    <!-- Comment modal trigger -->
+    <span data-toggle="modal" data-target="#commentModal_{{post.id}}">
+    <i class="fa fa-pencil" aria-hidden="true"></i>
+    </span>
+  </h5>
+
+  <div id="commentModal_{{post.id}}"
+       class="modal fade bs-example-modal-md"
+       tabindex="-1"
+       post-id="{{post.id}}"
+       role="dialog"
+       aria-labelledby="myMedModalLabel">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content col-md-8">
+        <h3 class="text-center">NEW COMMENT</h3>
+
+        <form class="form-group text-center" novalidate name="commentForm"
+              ng-submit="submitComment(post, newComment, commentForm)">
+
+          <div class="form-group">
+            <label>Author</label><br>
+            <input type="text"
+                   id="author"
+                   name="author"
+                   ng-model="newComment.author"
+                   minlength=3
+                   maxlength=20
+                   ng-class="{'has-error': checkForError(commentForm.author),
+                              'has-success': commentForm.author.$valid }"
+                   required>
+            <p ng-show="checkForError(commentForm.author)"
+               class="help-block">What's YOUR name?</p>
+          </div>
+
+        <div class="form-group">
+          <label>Comment</label><br>
+          <textarea type="textgroup"
+                    id="comment"
+                    name="myComment"
+                    ng-model="newComment.myComment"
+                    ng-class= "{'has-error': checkForError(commentForm.comment),
+                               'has-success': commentForm.comment.$valid}"
+                    required>
+          </textarea>
+          <p ng-show="checkForError(commentForm.myComment)"
+             class="help-block">What's your point?</p>
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Submit</button>
+        </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <div ng-show="post.showComments" class="fade">
+
+    <div ng-repeat="comment in post.comments">
+      <h5>{{comment.author}}</h5>
+      <small><p>{{comment.myComment}}</p></small>
+    </div>
+  </div>
+</article>
