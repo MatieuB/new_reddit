@@ -5,7 +5,7 @@ angular.module('Reddit').directive('mbComment', function() {
         templateUrl: '/directives/comments/comments.html',
         link: function(scope, element, attrs, fn) {
             scope.comments = scope.post.comments;
-            scope.vs = {};
+            scope.view = {};
 
             scope.submitComment = function(post, comment, commentForm) {
               var commentCopy = angular.copy(comment);

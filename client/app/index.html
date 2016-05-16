@@ -22,9 +22,10 @@
   <!-- uiRouter -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
   <!-- Module -->
-  <script src="/app.js"></script>
+  <script src="/module.js"></script>
   <!-- Controller -->
   <script src="/controllers/controller.js"></script>
+  <script src="/controllers/post_controller.js"></script>
 
   <!-- Directives -->
   <script src="/directives/headers/header.js"></script>
@@ -34,9 +35,16 @@
   <script src="/services/post_service.js"></script>
   <title>New Reddit</title>
 </head>
-<body ng-controller="Main">
+<body>
   <mb-header order-val='view.orderVal' search-text='view.searchText'></mb-header>
-  <mb-posts order-val='view.orderVal' search-text='view.searchText'></mb-posts>
+  <!-- <ui-view></ui-view>
+  ### -->
+  <mb-posts></mb-posts>
+
 </body>
+
+
+
+
 
 </html>

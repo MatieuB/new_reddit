@@ -1,12 +1,17 @@
-<article class="container">
+<div>
+  <h1>hi</h1>
+
+<div class="container">
   <p ng-bind="view.searchText"></p>
-  <div ng-repeat="post in view.posts | orderBy: orderVal | filter:searchText" class="panel panel-default row col-md-12">
+  <div ng-repeat="post in view.posts track by $index"
+  class="panel panel-default row col-md-12">
 
     <a href="#" class="thumbnail col-md-3">
       <img ng-src="{{post.image}}" alt="hg">
     </a>
     <div class="col-md-9">
       <p class="text-right">{{post.author}}</p>
+      <p>id: {{post.id}}</p>
        <span><h4>{{post.title}} | <span ng-class="voteClass(post)">{{post.vote}}</span>
       <span ng-click="changeVotes(post,1)"><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
       <span ng-click="changeVotes(post,-1)"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
@@ -43,4 +48,8 @@
       </div>
     </div>
   </div>
-</article>
+</div>
+
+
+
+</div>
