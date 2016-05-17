@@ -7,7 +7,7 @@ angular.module('Reddit',['ngAnimate','ui.router'])
   // HOME STATES AND NESTED VIEWS ========================================
   .state('home', {
     url: '/',
-    templateUrl: '/directives/posts/posts.html'
+    template: '<mb-posts></mb-post'
   })
 
   // nested list with custom controller

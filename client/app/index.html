@@ -29,7 +29,7 @@
 
   <!-- Directives -->
   <script src="/directives/headers/header.js"></script>
-  <script src="/directives/posts/posts.js"></script>
+  <script src="/directives/posts/posts_directive.js"></script>
   <script src="/directives/comments/comments.js"></script>
   <!-- Services -->
   <script src="/services/post_service.js"></script>
@@ -37,9 +37,9 @@
 </head>
 <body>
   <mb-header order-val='view.orderVal' search-text='view.searchText'></mb-header>
-  <!-- <ui-view></ui-view>
-  ### -->
-  <mb-posts></mb-posts>
+  <div ui-view></div>
+  <!-- ###
+  <mb-posts></mb-posts> -->
 
 </body>
 
