@@ -3,7 +3,7 @@ angular.module('Reddit')
       $scope.view = {};
       $scope.newPost = {};
       postService.all().then(function(response) {
-        $scope.view.posts = response.data
+        $scope.view.posts = response.data.posts
       });
 
       $scope.submitPost = function(post, postForm){

@@ -62,8 +62,8 @@
   </div>
   <div ng-show="post.showComments" class="fade">
     <div ng-repeat="comment in post.comments">
-      <h5>{{comment.author}}</h5>
-      <small><p>{{comment.myComment}}</p></small>
+      <h5>{{comment.user_id}}</h5>
+      <small><p>{{comment.comment}}</p></small>
     </div>
   </div>
 </article>
