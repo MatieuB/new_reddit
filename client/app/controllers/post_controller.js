@@ -2,7 +2,9 @@ angular.module('Reddit')
   .controller('PostCtrl',['$scope','$log','postService',function($scope,$log,postService) {
       $scope.view = {};
       $scope.newPost = {};
-      $scope.view.posts =  postService.getPosts();
+      postService.all().then(function(response) {
+        $scope.view.posts = response.data
+      });
 
       $scope.submitPost = function(post, postForm){
         $scope.newPost.id = postService.getNewId();

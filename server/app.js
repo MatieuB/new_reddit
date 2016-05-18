@@ -12,6 +12,8 @@ var knex = require('knex')(require('./knexfile')['development']);
 var routes = require('./routes/api');
 
 var app = express();
+app.use(cors());
+
 
 
 // uncomment after placing your favicon in /public
@@ -24,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // cors
-app.options('*', cors()); // include before other routes
+// app.use('*', cors()); // include before other routes
 
 app.use('/api', routes);
 

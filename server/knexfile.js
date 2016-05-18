@@ -2,7 +2,7 @@
 
 module.exports = {
   development: {
-    client: 'postgresql',
+    client: 'pg',
     connection: 'postgres://localhost/reddit'
   },
   seeds: {
