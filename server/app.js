@@ -6,12 +6,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors')
+var knex = require('knex')(require('./knexfile')['development']);
 
 
 var routes = require('./routes/api');
 
 var app = express();
-
 
 
 // uncomment after placing your favicon in /public
