@@ -39,7 +39,7 @@
           <input type="text" class="form-control" ng-model="searchText" placeholder="Search">
         </div>
       </form>
-      <div class="nav navbar-form navbar-right">
+      <div ng-if="!localStorage.getItem('token')"div class="nav navbar-form navbar-right">
         <a class='col-md-offset-9' data-toggle="modal" data-target="#signUpModal" href="#">Need an account?</a>
         <form  novalidate ng-submit='loginSubmit()'>
           {{error}}

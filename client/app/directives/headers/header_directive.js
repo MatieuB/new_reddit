@@ -9,6 +9,8 @@ angular.module('Reddit')
             $log.info($scope.userForm);
             userService.newUser($scope.userForm).then(function(response) {
               $log.info('response from dir controller: ',response)
+              localStorage.setItem('token',response.data.token)
+              
             })
           }
         }
