@@ -4,6 +4,8 @@ var knex = require('knex')(require('../knexfile')['development']);
 var env = require('dotenv').config()
 var app = express()
 var cors = require('cors')
+var bcrypt = require('bcrypt')
+var jwt = require('jsonwebtoken')
 
 // cors
 app.use(cors()); // include before other routes
@@ -40,7 +42,7 @@ router.post('/users/add',function(req,res,next) {
   const errors = []
 
   if (!req.body.email || !req.body.email.trim()) errors.push("Email can't be blank");
-  if (!req.body.username || !req.body.username.trim()) errors.push("Name can't be blank");
+  if (!req.body.name || !req.body.name.trim()) errors.push("Name can't be blank");
   if (!req.body.password || !req.body.password.trim()) errors.push("Password can't be blank");
 
   if (errors.length) {
@@ -60,7 +62,7 @@ router.post('/users/add',function(req,res,next) {
            knex('users')
             .insert({
               email: req.body.email,
-              username: req.body.username,
+              name: req.body.name,
               password: hash
             })
             .returning('*')

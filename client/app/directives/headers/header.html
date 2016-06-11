@@ -3,6 +3,7 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
+
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -18,31 +19,62 @@
           <!-- Medium modal -->
           <li ng-click="addPost()" data-toggle="modal" data-target="#postModal"><a href="#">+ NEW POST <span class="sr-only">(current)</span></a></li>
           <!-- <select ng-click="logOrderVal()" ng-model="orderVal">
-            <option value="title">Title</option>
-            <option value="author">Author</option>
-            <option value="vote">Votes</option>
-            <option value="date">Date</option>
-          </select> -->
-           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By<span class="caret"></span></a>
-            <ul class="dropdown-menu" ng-model="view.orderVal" ng-click="logOrderVal()">
-              <li><a value="title" href="#">Title</a></li>
-              <li><a value="author" href="#">Author</a></li>
-              <li><a value="vote" href="#">Votes</a></li>
-              <li><a value="date" href="#">Date</a></li>
-
-            </ul>
-          </li> 
-
-        </ul>
-        <form class="navbar-form navbar-left" role="search">
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="vote">Votes</option>
+          <option value="date">Date</option>
+        </select> -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By<span class="caret"></span></a>
+          <ul class="dropdown-menu" ng-model="view.orderVal" ng-click="logOrderVal()">
+            <li><a value="title" href="#">Title</a></li>
+            <li><a value="author" href="#">Author</a></li>
+            <li><a value="vote" href="#">Votes</a></li>
+            <li><a value="date" href="#">Date</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="searchText" placeholder="Search">
+        </div>
+      </form>
+      <div class="nav navbar-form navbar-right">
+        <a class='col-md-offset-9' data-toggle="modal" data-target="#signUpModal" href="#">Need an account?</a>
+        <form  novalidate ng-submit='loginSubmit()'>
+          {{error}}
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="searchText" placeholder="Search">
-          </div>
-        </form>
+            <label>Email</label>
+            <input class="form-control"type="text" name='email' ng-model='loginForm.email' minlength='5' maxlength="30" required>
+            <label>Password</label>
+            <input class="form-control"type="password" name='password' ng-model='loginForm.password' minlength='3' maxlength="20" required>
+            <input type="submit" value="login" class='btn btn default'>
+          </form>
+        </div>
       </div>
-      <!-- /.navbar-collapse -->
+      <div id="signUpModal" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myMedModalLabel">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content  col-md-10">
+            <form novalidate ng-submit='signUp()'>
+              <div class='navbar-form text-center form-group'>
+                <fieldset>
+                  <legend >Signup</legend>
+                  <label>Username</label><br>
+                  <input class='form-control signup' type="text" name='username' ng-model='userForm.name' minlength='3' maxlength="20" required><br>
+                  <label>Email</label><br>
+                  <input class='form-control signup' type="text" name='email' ng-model='userForm.email' minlength='3' maxlength="30" required><br>
+                  <label>Password</label><br>
+                  <input class='form-control signup' type="password" name='password' ng-model='userForm.password' minlength='3' maxlength="20" required><hr>
+                  <input type="submit" class='btn btn-default col-md-offset-7'>
+                </fieldset>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.container-fluid -->
-  </nav>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
 </nav>

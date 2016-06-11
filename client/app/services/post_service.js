@@ -19,6 +19,12 @@ angular.module('Reddit')
       },
       getPost: function(id) {
         return $http.get('/api/post/'+ id)
+      },
+      changeVotes: function(id){
+        return $http.post('http://localhost:4000/api/votes').then(function(response){
+          $log.info(response);
+          return response;
+        })
       }
     }
   }])

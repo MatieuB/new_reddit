@@ -9,14 +9,7 @@ angular.module('Reddit',['ngAnimate','ui.router'])
     url: '/',
     template: '<mb-posts></mb-post>'
   })
-  .state('signup', {
-    url: '/signup',
-    templateUrl: '/directives/user/signup.html'
-  })
-  .state('login', {
-    url: '/login',
-    templateUrl: 'directives/user/login.html'
-  })
+
 
   // nested list with custom controller
   // .state('home.list', {

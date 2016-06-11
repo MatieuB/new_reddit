@@ -29,3 +29,6 @@
   opacity:0;
   transform: translateX(100%);
 }
+.form-group .signup{
+  width:300px;
+}
