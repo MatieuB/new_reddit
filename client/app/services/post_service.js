@@ -8,8 +8,11 @@ angular.module('Reddit')
           return response
         });
       },
-      addPost: function(newPostData) {
-        return $http.post('/api/posts/add',newPostData)
+      newPost: function(newPost) {
+        return $http.post('http://localhost:4000/api/posts/add',newPost).then(function(response){
+          log.info(response)
+          return response
+        })
       },
       deletePost: function(id) {
         return $http.delete('/api/post/' + id)

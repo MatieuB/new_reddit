@@ -12,14 +12,22 @@ angular.module('Reddit')
       if(localStorage.getItem('token')){
         $scope.signedIn = true
       } else {
+        localStorage.clear();
+        $scope.signedIn = false;
+      }
+      if(localStorage.getItem('username')){
+        $scope.userName = localStorage.getItem('username')
+      } else {
         $scope.signedIn = false;
       }
       $scope.signUp = function(){
         $log.info($scope.userForm);
         userService.newUser($scope.userForm).then(function(response) {
           $log.info('response from dir controller: ',response)
-          localStorage.setItem('token',response.data.token)
-          localStorage.setItem('username',response.data.username)
+          localStorage.setItem('token',response.data.token);
+          localStorage.setItem('username',response.data.username);
+          localStorage.setItem('user_id',response.data.id);
+
           $scope.userName = localStorage.getItem('username')
           $scope.signedIn = true;
 
@@ -31,6 +39,7 @@ angular.module('Reddit')
           if(response.data.token){
             localStorage.setItem('token',response.data.token)
             localStorage.setItem('username',response.data.username)
+            localStorage.setItem('user_id',response.data.id);
             $scope.userName = localStorage.getItem('username')
             $scope.signedIn = true;
           } else {

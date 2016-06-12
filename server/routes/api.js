@@ -87,9 +87,19 @@ router.post('/users/add',function(req,res,next) {
       })
   }
 })
+router.post('/posts/add',function(req,res,next) {
+  console.log('req.body: ',req.body);
+
+  knex('posts')
+  .insert(req.body)
+  .returning('*')
+  .then(function(data){
+    console.log(data);
+  res.json(data);
+  })
+})
 // login
 router.post('/login', function(req,res,next) {
-
   knex('users')
     .where('email', '=', req.body.email.toLowerCase())
     .first()
@@ -113,8 +123,6 @@ router.post('/login', function(req,res,next) {
 
       }
     });
-
-
 })
 
 router.get('/posts', function(req, res, next) {
@@ -154,5 +162,6 @@ router.get('/posts', function(req, res, next) {
     res.json(_posts)
   })
 })
+
 
 module.exports = router;
