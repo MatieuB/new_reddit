@@ -98,6 +98,17 @@ router.post('/posts/add',function(req,res,next) {
   res.json(data);
   })
 })
+router.post('/comments/add',function(req,res,next) {
+  console.log('req.body: ',req.body);
+
+  knex('comments')
+  .insert(req.body)
+  .returning('*')
+  .then(function(data){
+    console.log(data);
+  res.json(data);
+  })
+})
 // login
 router.post('/login', function(req,res,next) {
   knex('users')

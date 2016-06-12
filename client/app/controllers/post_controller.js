@@ -2,9 +2,12 @@ angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','postService',function($scope,$log,$http,postService) {
   $scope.view = {};
   $scope.newPost = {};
+  $scope.post = {}
   postService.all().then(function(response) {
     $scope.view.posts = response.data;
   });
+  // $log.info('$scope.view.posts: ',$scope.view.posts)
+
   $scope.newPost.showComments = false;
   $scope.newPost.votes = 0;
   $scope.newPost.user_id = Number(localStorage.getItem('user_id'));
@@ -25,20 +28,23 @@ angular.module('Reddit')
       });
     }
   }
+  $scope.newComment = {}
+  $scope.newComment.user_id = Number(localStorage.getItem('user_id'));
+  // $scope.newComment.post_id = post.id
 
-  // $scope.submitPost = function(post, postForm){
-  //   $scope.newPost.id = postService.getNewId();
-  //   $scope.newPost.showComments = false;
-  //   $scope.newPost.vote = 0;
-  //   $scope.newPost.comments = [];
-  //   var postCopy = angular.copy($scope.newPost);
-  //   postService.addPost(postCopy);
-  //   $('#postModal').modal('hide');
-  //   $('.modal-backdrop').remove();
-  //   $scope.newPost = {};
-  //   postService.getPosts()
-  // }
-  // $scope.changeVotes = function(post,changeVal) {
-  //   postService.changeVotes(post,changeVal)
-  // }
+  $scope.submitComment = function(){
+    if(!localStorage.getItem ('token')){
+      alert('Please login to make a comment')
+    } else {
+      var commentCopy = angular.copy($scope.newComment)
+      postService.newComment(commentCopy).then(function(response){
+        $log.info(response)
+      })
+    }
+  }
+  $scope.toggleComments = function() {
+    $scope.post.showComments = !$scope.post.showComments
+    $log.info('showComments: ', $scope.post.showComments)
+  }
+  $log.info('$scope.post: ',$scope.post)
 }])

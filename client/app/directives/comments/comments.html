@@ -22,7 +22,7 @@
         <form class="form-group text-center" novalidate name="commentForm"
               ng-submit="submitComment(post, newComment, commentForm)">
 
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Author</label><br>
             <input type="text"
                    id="author"
@@ -35,19 +35,19 @@
                    required>
             <p ng-show="checkForError(commentForm.author)"
                class="help-block">What's YOUR name?</p>
-          </div>
+          </div> -->
 
         <div class="form-group">
           <label>Comment</label><br>
           <textarea type="textgroup"
                     id="comment"
-                    name="myComment"
-                    ng-model="newComment.myComment"
+                    name="comment"
+                    ng-model="newComment.comment"
                     ng-class= "{'has-error': checkForError(commentForm.comment),
                                'has-success': commentForm.comment.$valid}"
                     required>
           </textarea>
-          <p ng-show="checkForError(commentForm.myComment)"
+          <p ng-show="checkForError(commentForm.comment)"
              class="help-block">What's your point?</p>
         </div>
 

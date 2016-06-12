@@ -32,3 +32,6 @@
 .form-group .signup{
   width:300px;
 }
+.hidden {
+  display: none;
+}
