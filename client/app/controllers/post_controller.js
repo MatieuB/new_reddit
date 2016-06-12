@@ -10,17 +10,20 @@ angular.module('Reddit')
   $scope.newPost.user_id = Number(localStorage.getItem('user_id'));
   $scope.newPost.favorite = false;
   $scope.submitPost = function(){
-
-    var postCopy = angular.copy($scope.newPost)
-    $log.info('post: ',postCopy)
-    $http.post('http://localhost:4000/api/posts/add',postCopy).then(function(response){
-      $log.info('response from new post: ',response)
-    }).then(function(){
-      postService.all().then(function(response) {
-        $scope.view.posts = response.data
-      })
-    });
-
+    if(!localStorage.getItem('token')){
+      alert('Please login to make a post')
+    } else {
+      var postCopy = angular.copy($scope.newPost)
+      $log.info('post: ',postCopy)
+      $http.post('http://localhost:4000/api/posts/add',postCopy).then(function(response){
+        $log.info('response from new post: ',response)
+      }).then(function(){
+        postService.all().then(function(response) {
+          $scope.view.posts = response.data
+          $scope.newPost = {};
+        })
+      });
+    }
   }
 
   // $scope.submitPost = function(post, postForm){
