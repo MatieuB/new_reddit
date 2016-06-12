@@ -105,7 +105,7 @@ router.post('/login', function(req,res,next) {
           res.json({
           id: user.id,
           email: user.email,
-          username: user.username,
+          username: user.name,
           token: token
           })
         } else {

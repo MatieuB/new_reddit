@@ -7,14 +7,14 @@ angular.module('Reddit')
         return response
       })
     },
-    login: function() {
-      return $http.post('http//:localhost:4000/login').then(function(response){
+    login: function(user) {
+      return $http.post('http://localhost:4000/api/login',user).then(function(response){
         $log.info('response from login post: ',response)
         return response
       })
     },
     me: function() {
-      return $http.get('http//:localhost:4000/me').then(function(response){
+      return $http.get('http://localhost:4000/me').then(function(response){
         $log.info('response from /me route: ',response)
         return response
       })

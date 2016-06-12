@@ -39,18 +39,22 @@
           <input type="text" class="form-control" ng-model="searchText" placeholder="Search">
         </div>
       </form>
-      <div ng-if="!localStorage.getItem('token')"div class="nav navbar-form navbar-right">
+      <div ng-show="signedIn == false"class="nav navbar-form navbar-right">
         <a class='col-md-offset-9' data-toggle="modal" data-target="#signUpModal" href="#">Need an account?</a>
-        <form  novalidate ng-submit='loginSubmit()'>
+        <form  novalidate ng-submit='logIn()'>
           {{error}}
           <div class="form-group">
             <label>Email</label>
             <input class="form-control"type="text" name='email' ng-model='loginForm.email' minlength='5' maxlength="30" required>
             <label>Password</label>
             <input class="form-control"type="password" name='password' ng-model='loginForm.password' minlength='3' maxlength="20" required>
-            <input type="submit" value="login" class='btn btn default'>
+            <input type="submit" value="login" class='btn btn-default'>
           </form>
         </div>
+      </div>
+      <div ng-show="signedIn == true" class="nav navbar-form navbar-right">
+      <h4>Welcome {{userName}}</h4>
+      <button class="col-md-offset-4 btn btn-default" ng-click="logOut()">logout</button>
       </div>
       <div id="signUpModal" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myMedModalLabel">
         <div class="modal-dialog modal-md">

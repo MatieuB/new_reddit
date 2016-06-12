@@ -1,5 +1,5 @@
-angular.module('Reddit',['ngAnimate','ui.router'])
-.config(function($stateProvider, $urlRouterProvider) {
+angular.module('Reddit',['ngAnimate','ui.router','LocalStorageModule'])
+.config(function($stateProvider, $urlRouterProvider,localStorageServiceProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
