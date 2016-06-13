@@ -1,12 +1,27 @@
 angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','postService',function($scope,$log,$http,postService) {
+
+    // $http.get('http://localhost:4000/api/users/me')
+    //   .then(function (response) {
+    //     $log.info('from resolve',response.data)
+    //     if(response.data.error) {
+    //       localStorage.clear();
+    //       // $location.path('/login')
+    //       return {message: 'need to login'}
+    //     }
+    //     return response.data
+    //   })
+
+  // postService.getMe().then(function(response){
+  //   $log.info('me route post controller', response)
+  // })
   $scope.view = {};
   $scope.newPost = {};
   $scope.post = {}
   postService.all().then(function(response) {
     $scope.view.posts = response.data;
   });
-  // $log.info('$scope.view.posts: ',$scope.view.posts)
+
 
   $scope.newPost.showComments = false;
   $scope.newPost.votes = 0;

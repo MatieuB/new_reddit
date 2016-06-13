@@ -3,7 +3,7 @@ angular.module('Reddit')
   $scope.newComment = {}
   $scope.newComment.user_id = Number(localStorage.getItem('user_id'))
 
-  $scope.submitComment = function(post){
+  $scope.submitComment = function(post) {
     if(!localStorage.getItem ('token')){
       alert('Please login to make a comment')
     } else {
@@ -11,6 +11,7 @@ angular.module('Reddit')
       var commentCopy = angular.copy($scope.newComment)
       postService.newComment(commentCopy).then(function(response){
         $log.info(response)
+
       }).then(function(){
         postService.all().then(function(response) {
           $scope.view.posts = response.data

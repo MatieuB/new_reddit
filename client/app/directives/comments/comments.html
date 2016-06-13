@@ -22,22 +22,7 @@
         <form class="form-group text-center" novalidate name="commentForm"
               ng-submit="submitComment(post, newComment, commentForm)">
 
-          <!-- <div class="form-group">
-            <label>Author</label><br>
-            <input type="text"
-                   id="author"
-                   name="author"
-                   ng-model="newComment.author"
-                   minlength=3
-                   maxlength=20
-                   ng-class="{'has-error': checkForError(commentForm.author),
-                              'has-success': commentForm.author.$valid }"
-                   required>
-            <p ng-show="checkForError(commentForm.author)"
-               class="help-block">What's YOUR name?</p>
-          </div> -->
-
-        <div class="form-group">
+          <div class="form-group">
           <label>Comment</label><br>
           <textarea type="textgroup"
                     id="comment"
@@ -62,7 +47,7 @@
   </div>
   <div ng-show="post.showComments" class="fade">
     <div ng-repeat="comment in post.comments">
-      <h5>{{comment.user_id}}</h5>
+      <h5>{{comment.name}}</h5>
       <small><p>{{comment.comment}}</p></small>
     </div>
   </div>

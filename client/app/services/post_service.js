@@ -13,6 +13,18 @@ angular.module('Reddit')
         return response
       })
     },
+    getMe: function(){
+      $http.get('http://localhost:4000/api/users/me')
+      .then(function (response) {
+        $log.info('from resolve',response.data)
+        if(response.data.error) {
+          localStorage.clear();
+          // $location.path('/login')
+          return {message: 'need to login'}
+        }
+        return response.data
+      })
+    },
     deletePost: function(id) {
       return $http.delete('/api/post/' + id)
     },
