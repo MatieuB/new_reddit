@@ -1,6 +1,6 @@
 {
   "firebase": "myfirebase",
-
+  
   "ignore": [
     "firebase.json",
     "**/.*",

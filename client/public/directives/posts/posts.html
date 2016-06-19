@@ -8,66 +8,17 @@
       <img ng-src="{{post.image_url}}" alt="hg">
     </a>
     <div class="col-md-9">
+  <h1>test:{{test}}</h1>
+  <h2>second test</h2>
       <p class="text-right">by: {{post.username}}</p>
       <span><h4>{{post.title}} | <span ng-class="voteClass(post)">votes: {{post.votes}}</span>
-        <span ng-click="changeVotes(post,1)"><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-        <span ng-click="changeVotes(post,-1)"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+        <span ng-click="voteChange()"><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+        <span ng-click="voteChange()"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
       </h4</span>
       <p>{{post.description}}</p>
       <mb-comment></mb-comment>
-      <!-- <article class="comments">
-        <h5>COMMENTS |
-          <span ng-click="toggleComments()">
-            <i class="fa fa-comments" aria-hidden="true"></i>
-          </span> |
-        comment modal trigger
-          <span data-toggle="modal" data-target="#commentModal_{{post.id}}">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </span>
-        </h5>
 
-        <div id="commentModal_{{post.id}}"
-        class="modal fade bs-example-modal-md"
-        tabindex="-1"
-        post-id="{{post.id}}"
-        role="dialog"
-        aria-labelledby="myMedModalLabel">
-        <div class="modal-dialog modal-md">
-          <div class="modal-content col-md-8">
-            <h3 class="text-center">NEW COMMENT</h3>
 
-            <form class="form-group text-center" novalidate name="commentForm"
-            ng-submit="submitComment(post, newComment, commentForm)">
-            <div class="form-group">
-              <label>Comment</label><br>
-              <textarea type="textgroup"
-              id="comment"
-              name="comment"
-              ng-model="newComment.comment"
-              ng-class= "{'has-error': checkForError(commentForm.comment),
-              'has-success': commentForm.comment.$valid}"
-              required>
-            </textarea>
-            <p ng-show="checkForError(commentForm.comment)"
-            class="help-block">What's your point?</p>
-          </div>
-
-          <div class="form-group">
-            <button type="submit">Submit</button>
-          </div>
-
-        </form>
-      </div>
-
-    </div>
-  </div>
-  <div ng-show="post.showComments" class="fade">
-    <div ng-repeat="comment in post.comments">
-      <h5>{{comment.user_id}}</h5>
-      <small><p>{{comment.comment}}</p></small>
-    </div>
-  </div>
-</article> -->
 </div>
 </div>
 <div id="postModal" class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myMedModalLabel">

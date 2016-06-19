@@ -35,3 +35,8 @@
 .hidden {
   display: none;
 }
+.comments{
+  overflow: scroll;
+  height:150px;
+
+}
