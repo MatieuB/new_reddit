@@ -5,7 +5,7 @@ angular.module('Reddit')
       orderVal: '=',
       searchText: '='
     },
-    templateUrl: '/directives/posts/posts.html',
+    templateUrl: './directives/posts/posts.html',
     transclude: true,
     controller: 'PostCtrl'
 

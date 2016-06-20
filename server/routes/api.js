@@ -67,7 +67,7 @@ router.post('/users/add',function(req,res,next) {
             })
             .returning('*')
             .then(function (users) {
-              console.log('from the promise:',users);
+              // console.log('from the promise:',users);
               const user = users[0];
               const token = jwt.sign( {id:user.id} , process.env.JWT_SECRET);
               // console.log('token',token)
@@ -88,24 +88,34 @@ router.post('/users/add',function(req,res,next) {
   }
 })
 router.post('/posts/add',function(req,res,next) {
-  console.log('req.body: ',req.body);
+  // console.log('req.body: ',req.body);
 
   knex('posts')
   .insert(req.body)
   .returning('*')
   .then(function(data){
-    console.log(data);
+    // console.log(data);
   res.json(data);
   })
 })
+router.post('/votes',function(req,res,next){
+  console.log('req.body',req.body);
+  knex('posts')
+  .where('id',req.body.id)
+  .update({votes:req.body.votes})
+  .then(function(nextThing){
+    console.log("nextThing",nextThing);
+  })
+
+})
 router.post('/comments/add',function(req,res,next) {
-  console.log('req.body: ',req.body);
+  // console.log('req.body: ',req.body);
 
   knex('comments')
   .insert(req.body)
   .returning('*')
   .then(function(data){
-    console.log(data);
+    // console.log(data);
   res.json(data);
   })
 })
@@ -117,12 +127,12 @@ router.post('/login', function(req,res,next) {
     .then(function(response){
       // error check for email??
       if(response && bcrypt.compareSync(req.body.password, response.password)){
-       console.log('user found');
+      //  console.log('user found');
       //  console.log('from the response promise:', response)
        const user = response;
-       console.log('user: ',user)
+      //  console.log('user: ',user)
        const token = jwt.sign( {id:user.id} , process.env.JWT_SECRET);
-       console.log('token',token)
+      //  console.log('token',token)
           res.json({
           id: user.id,
           email: user.email,
@@ -142,7 +152,7 @@ router.get('/posts', function(req, res, next) {
   .innerJoin('users','posts.user_id','users.id')
   .select('posts.title','posts.description','posts.votes','posts.image_url','posts.created_at','users.name','posts.id','posts.user_id')
   .then(function(data){
-    console.log('data: ', data);
+    // console.log('data: ', data);
     data.forEach(function(item){
       _posts.push({
         id:item.id,
@@ -163,13 +173,13 @@ router.get('/posts', function(req, res, next) {
   .then(function(dataComments){
     _posts.forEach(function(post){
       dataComments.forEach(function(comment){
-        console.log('comment: ',comment);
+        // console.log('comment: ',comment);
         if(post.id === comment.post_id){
           post.comments.push(comment)
         }
       })
     })
-    console.log('posts: ',_posts);
+    // console.log('posts: ',_posts);
     res.json(_posts)
   })
 })

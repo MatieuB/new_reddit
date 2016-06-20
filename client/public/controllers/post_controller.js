@@ -6,8 +6,15 @@ angular.module('Reddit')
   $scope.newPost = {};
   $scope.post = {}
   $scope.test ="testing......"
-  $scope.voteChange = function(){
-    $log.info('arrow clicked!')
+  $scope.changeVotes = function(post,changeVal){
+    post.votes +=changeVal;
+  }
+  $scope.voteChange = function(post){
+    // $log.info('arrow clicked!');
+    // post.votes +=changeVal
+    postService.changeVotes(post).then(function(data){
+      $log.info('data from votechange pstctrl: ',data)
+    })
   }
   postService.all().then(function(response) {
     $scope.view.posts = response.data;
