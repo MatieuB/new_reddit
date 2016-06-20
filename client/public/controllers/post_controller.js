@@ -1,6 +1,10 @@
 angular.module('Reddit')
-.controller('PostCtrl',['$scope','$log','$http','postService',function($scope,$log,$http,postService) {
-  // $log.info('currentUser: ', currentUser)
+.controller('PostCtrl',['$scope','$log','$http','$rootScope','postService',function($scope,$log,$http,$rootScope,postService) {
+
+  postService.getUser();
+  $log.info('from controller:',$rootScope.user)
+
+
 
   $scope.view = {};
   $scope.newPost = {};
