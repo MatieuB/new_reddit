@@ -1,5 +1,9 @@
 angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','$rootScope','postService',function($scope,$log,$http,$rootScope,postService) {
+
+  postService.all().then(function(response) {
+    $rootScope.view.posts = response.data;
+  });
   $rootScope.user = {}
   $rootScope.view ={}
   // $rootScope.view.posts =[]
@@ -33,9 +37,7 @@ angular.module('Reddit')
       $log.info('data from votechange pstctrl: ',data)
     })
   }
-  postService.all().then(function(response) {
-    $rootScope.view.posts = response.data;
-  });
+
   $scope.newPost.showComments = false;
   $scope.newPost.votes = 0;
   $scope.newPost.user_id = Number(localStorage.getItem('user_id'));

@@ -23,14 +23,16 @@
           $rootScope.post = data.data[0]
           $log.info('RSP',$rootScope.post);
         });
-        // $scope.editPost = {};
-        $scope.submitEdit = function(){
-          // postService.editPost($rootScope.post)
 
+        $scope.submitEdit = function(){
+          $rootScope.view.posts[Number($rootScope.post.id)-1] = $rootScope.post
           $http.put('http://localhost:4000/api/edit/post/'+$rootScope.post.id,$rootScope.post).then(function(data){
             $log.info('data from edit:',data)
+            postService.all().then(function(response){
+              $rootScope.view.post = response.data
+            })
+            $state.go('home')
           })
-          $state.go('home')
         }
       }
     })
