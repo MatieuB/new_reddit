@@ -13,33 +13,28 @@
     .state('home', {
       url: '/',
       template: '<mb-posts></mb-post>'
-      // resolve: {
-      //   currentUser: function($http,$log,$state) {
-      //     if(localStorage.getItem('token')) {
-      //       $log.info('checking for token....')
-      //       const config = {
-      //         headers: {
-      //           authorization: 'Bearer ' + localStorage.getItem('token')
-      //         }
-      //       }
-      //       return $http.get('http://localhost:4000/api/users/me',config)
-      //       .then(function(response) {
-      //         $log.info('from the resolve:',response)
-      //         $log.info(response.data)
-      //         return response.data
-      //         // $state.go('tab.home')
-      //       })
-      //       .catch(function (err) {
-      //         $log.info('there was an error: ',err)
-      //         localStorage.clear();
-      //         $scope.signedIn = false;
-      //         $state.go('home')
-      //         // return null;
-      //       })
-      //     }
-      //   }
-      // }
+
     })
+    .state('edit',{
+      url:'/edit/:id',
+      templateUrl: '/directives/posts/edit_post.html',
+      controller: function($scope,$log,$rootScope,$state,$http,$stateParams,postService){
+        postService.getPost($stateParams.id).then(function(data){
+          $rootScope.post = data.data[0]
+          $log.info('RSP',$rootScope.post);
+        });
+        // $scope.editPost = {};
+        $scope.submitEdit = function(){
+          // postService.editPost($rootScope.post)
+
+          $http.put('http://localhost:4000/api/edit/post/'+$rootScope.post.id,$rootScope.post).then(function(data){
+            $log.info('data from edit:',data)
+          })
+          $state.go('home')
+        }
+      }
+    })
+
     // $stateProvider.html5Mode(true);
   });
   angular.module('Reddit').factory('authInterceptor', function () {

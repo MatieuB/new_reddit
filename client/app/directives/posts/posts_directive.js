@@ -8,8 +8,5 @@ angular.module('Reddit')
     templateUrl: '/directives/posts/posts.html',
     transclude: true,
     controller: 'PostCtrl'
-
-
   }
-
 }]);

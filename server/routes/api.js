@@ -51,40 +51,40 @@ router.post('/users/add',function(req,res,next) {
     })
   } else {
     knex('users')
-      .whereRaw('lower(email) = ?', req.body.email.toLowerCase())
-      .count() // [{count: "0"}]
-      .first() // {count: "0"}
-      .then(function (result) {
-         // {count: "0"}
-         if (result.count === "0") {
-           const saltRounds = 4;
-           const hash = bcrypt.hashSync(req.body.password, saltRounds);
-           knex('users')
-            .insert({
-              email: req.body.email,
-              name: req.body.name,
-              password: hash
-            })
-            .returning('*')
-            .then(function (users) {
-              // console.log('from the promise:',users);
-              const user = users[0];
-              const token = jwt.sign( {id:user.id} , process.env.JWT_SECRET);
-              // console.log('token',token)
-              res.json({
-              id: user.id,
-              email: user.email,
-              username: user.name,
-              token: token
-            })
+    .whereRaw('lower(email) = ?', req.body.email.toLowerCase())
+    .count() // [{count: "0"}]
+    .first() // {count: "0"}
+    .then(function (result) {
+      // {count: "0"}
+      if (result.count === "0") {
+        const saltRounds = 4;
+        const hash = bcrypt.hashSync(req.body.password, saltRounds);
+        knex('users')
+        .insert({
+          email: req.body.email,
+          name: req.body.name,
+          password: hash
+        })
+        .returning('*')
+        .then(function (users) {
+          // console.log('from the promise:',users);
+          const user = users[0];
+          const token = jwt.sign( {id:user.id} , process.env.JWT_SECRET);
+          // console.log('token',token)
+          res.json({
+            id: user.id,
+            email: user.email,
+            username: user.name,
+            token: token
           })
+        })
 
-          } else {
-          res.status(422).json({
-            errors: ["Email has already been taken"]
-          })
-        }
-      })
+      } else {
+        res.status(422).json({
+          errors: ["Email has already been taken"]
+        })
+      }
+    })
   }
 })
 router.post('/posts/add',function(req,res,next) {
@@ -95,7 +95,7 @@ router.post('/posts/add',function(req,res,next) {
   .returning('*')
   .then(function(data){
     // console.log(data);
-  res.json(data);
+    res.json(data);
   })
 })
 router.post('/votes',function(req,res,next){
@@ -116,34 +116,34 @@ router.post('/comments/add',function(req,res,next) {
   .returning('*')
   .then(function(data){
     // console.log(data);
-  res.json(data);
+    res.json(data);
   })
 })
 // login
 router.post('/login', function(req,res,next) {
   knex('users')
-    .where('email', '=', req.body.email.toLowerCase())
-    .first()
-    .then(function(response){
-      // error check for email??
-      if(response && bcrypt.compareSync(req.body.password, response.password)){
+  .where('email', '=', req.body.email.toLowerCase())
+  .first()
+  .then(function(response){
+    // error check for email??
+    if(response && bcrypt.compareSync(req.body.password, response.password)){
       //  console.log('user found');
       //  console.log('from the response promise:', response)
-       const user = response;
+      const user = response;
       //  console.log('user: ',user)
-       const token = jwt.sign( {id:user.id} , process.env.JWT_SECRET);
+      const token = jwt.sign( {id:user.id} , process.env.JWT_SECRET);
       //  console.log('token',token)
-          res.json({
-          id: user.id,
-          email: user.email,
-          username: user.name,
-          token: token
-          })
-        } else {
-        res.status(422).send('Invalid email or password')
+      res.json({
+        id: user.id,
+        email: user.email,
+        username: user.name,
+        token: token
+      })
+    } else {
+      res.status(422).send('Invalid email or password')
 
-      }
-    });
+    }
+  });
 })
 
 router.get('/posts', function(req, res, next) {
@@ -190,6 +190,30 @@ router.delete('/delete/:id',function(req,res,next){
   .delete()
   .then(function(deleteData){
     console.log('deletedata from server: ',deleteData);
+  })
+})
+// update a post
+router.put('/edit/post/:id', function(req,res,next) {
+  console.log('req.body: ',req.body);
+  return knex('posts')
+  .where({id:req.params.id})
+  .update({
+    title: req.body.title,
+    image_url: req.body.image_url,
+    description: req.body.description
+  })
+  .returning('*')
+  .then(function(){
+    res.end()
+  })
+})
+// get a post by id
+router.get('/post/:id',function(req,res,next) {
+  return knex('posts')
+  .where('id',req.params.id)
+  .then(function(post) {
+    console.log('from the database======',post)
+    res.json(post);
   })
 })
 

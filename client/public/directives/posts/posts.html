@@ -10,7 +10,7 @@
     <div class="col-md-9">
       <div class="text-right">
         <p>by: {{post.username}}</p>
-        <button ng-show="$root.user.id == post.user_id" class="text-right btn btn-primary">Edit</button>
+        <a href="#/edit/{{post.id}}" ng-show="$root.user.id == post.user_id" class="text-right btn btn-primary">Edit</a>
         <button ng-show="$root.user.id == post.user_id" class="text-right btn btn-danger" ng-click="deletePost(post)">Delete</button>
         post.id = {{post.id}}
       </div>

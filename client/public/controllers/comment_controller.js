@@ -7,8 +7,9 @@ angular.module('Reddit')
     if(!localStorage.getItem ('token')){
       alert('Please login to make a comment')
     } else {
-      $scope.newComment.post_id = this.post.id
-      var commentCopy = angular.copy($scope.newComment)
+      $scope.newComment.post_id = this.post.id;
+      var commentCopy = angular.copy($scope.newComment);
+      // post.comments.push(commentCopy);
       postService.newComment(commentCopy).then(function(response){
         $log.info(response)
 

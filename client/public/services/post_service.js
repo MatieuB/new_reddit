@@ -39,11 +39,11 @@ angular.module('Reddit')
     deletePost: function(id) {
       return $http.delete('http://localhost:4000/api/delete/'+id)
     },
-    editPost: function(pirate) {
-      return $http.put('/api/edit/post/' +pirate.id , post)
+    editPost: function(post) {
+      return $http.put('http:localhost:4000/api/edit/post/'+post.id,post)
     },
     getPost: function(id) {
-      return $http.get('/api/post/'+ id)
+      return $http.get('http://localhost:4000/api/post/'+ id)
     },
     newComment: function(newComment) {
       return $http.post('http://localhost:4000/api/comments/add',newComment).then(function(response){
@@ -57,5 +57,12 @@ angular.module('Reddit')
         return response;
       })
     }
+    // ,
+    // editPost: function(pirate) {
+    //   return $http.put('/api/edit/pirate/' +pirate.id , pirate)
+    // },
+    // getPost: function(id) {
+    //   return $http.get('/api/pirate/'+ id)
+    // }
   }
 }])

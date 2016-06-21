@@ -1,14 +1,14 @@
 angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','$rootScope','postService',function($scope,$log,$http,$rootScope,postService) {
-$rootScope.user = {}
-$rootScope.view ={}
-// $rootScope.view.posts =[]
+  $rootScope.user = {}
+  $rootScope.view ={}
+  // $rootScope.view.posts =[]
   postService.getUser()
   // $rootScope.user = {}
 
-$rootScope.user.thing = "shutup"
-    $rootScope.user.name = localStorage.getItem('username');
-    $rootScope.user.id = localStorage.getItem('user_id')
+  $rootScope.user.thing = "shutup"
+  $rootScope.user.name = localStorage.getItem('username');
+  $rootScope.user.id = localStorage.getItem('user_id')
 
 
 
@@ -44,17 +44,21 @@ $rootScope.user.thing = "shutup"
     if(!localStorage.getItem('token')){
       alert('Please login to make a post')
     } else {
-      var postCopy = angular.copy($scope.newPost)
-      $log.info('post: ',postCopy)
-      $rootScope.view.posts.push(postCopy)
-      $http.post('http://localhost:4000/api/posts/add',postCopy).then(function(response){
+      $rootScope.view.posts.push($scope.newPost)
+      // var postCopy = angular.copy($scope.newPost)
+      // $log.info('post: ',postCopy)
+      // $rootScope.view.posts.push(postCopy)
+      postService.newPost($scope.newPost).then(function(response){
         $log.info('response from new post: ',response)
-      }).then(function(){
-        postService.all().then(function(response) {
-          $rootScope.view.posts = response.data
-          $scope.newPost = {};
-        })
-      });
+        $scope.newPost = {}
+      })
+
+      // .then(function(){
+      //   postService.all().then(function(response) {
+      //     $rootScope.view.posts = response.data
+      //     $scope.newPost = {};
+      //   })
+      // });
     }
   }
   $scope.view.posts
