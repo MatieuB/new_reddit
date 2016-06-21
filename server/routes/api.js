@@ -183,6 +183,14 @@ router.get('/posts', function(req, res, next) {
     res.json(_posts)
   })
 })
-
+// delete route
+router.delete('/delete/:id',function(req,res,next){
+  knex('posts')
+  .where({id:req.params.id})
+  .delete()
+  .then(function(deleteData){
+    console.log('deletedata from server: ',deleteData);
+  })
+})
 
 module.exports = router;

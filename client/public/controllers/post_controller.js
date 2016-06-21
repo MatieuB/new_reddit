@@ -1,6 +1,8 @@
 angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','$rootScope','postService',function($scope,$log,$http,$rootScope,postService) {
 $rootScope.user = {}
+$rootScope.view ={}
+// $rootScope.view.posts =[]
   postService.getUser()
   // $rootScope.user = {}
 
@@ -32,7 +34,7 @@ $rootScope.user.thing = "shutup"
     })
   }
   postService.all().then(function(response) {
-    $scope.view.posts = response.data;
+    $rootScope.view.posts = response.data;
   });
   $scope.newPost.showComments = false;
   $scope.newPost.votes = 0;
@@ -44,15 +46,28 @@ $rootScope.user.thing = "shutup"
     } else {
       var postCopy = angular.copy($scope.newPost)
       $log.info('post: ',postCopy)
+      $rootScope.view.posts.push(postCopy)
       $http.post('http://localhost:4000/api/posts/add',postCopy).then(function(response){
         $log.info('response from new post: ',response)
       }).then(function(){
         postService.all().then(function(response) {
-          $scope.view.posts = response.data
+          $rootScope.view.posts = response.data
           $scope.newPost = {};
         })
       });
     }
+  }
+  $scope.view.posts
+  $log.info('$rootScope.view.posts',$rootScope.view.posts)
+  $scope.deletePost = function(post){
+    $log.info('delete was clicked!!')
+    let index = $rootScope.view.posts.indexOf(post);
+    $rootScope.view.posts.splice(index, 1);
+    $log.info('was it deleted?',$rootScope.view.posts);
+    postService.deletePost(post.id).then(function(deleteData){
+
+
+    })
   }
 
 

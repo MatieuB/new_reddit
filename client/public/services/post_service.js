@@ -29,7 +29,7 @@ angular.module('Reddit')
       $rootScope.user = {}
       if(!localStorage.getItem('username')){
         $rootScope.user = {};
-      } 
+      }
       $rootScope.user.name = localStorage.getItem('username')
       $rootScope.user.id = localStorage.getItem('user_id')
       $log.info('user',$rootScope.user)
@@ -37,7 +37,7 @@ angular.module('Reddit')
     },
 
     deletePost: function(id) {
-      return $http.delete('/api/post/' + id)
+      return $http.delete('http://localhost:4000/api/delete/'+id)
     },
     editPost: function(pirate) {
       return $http.put('/api/edit/post/' +pirate.id , post)
