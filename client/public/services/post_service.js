@@ -27,32 +27,13 @@ angular.module('Reddit')
     },
     getUser: function(){
       $rootScope.user = {}
+      if(!localStorage.getItem('username')){
+        $rootScope.user = {};
+      } 
       $rootScope.user.name = localStorage.getItem('username')
       $rootScope.user.id = localStorage.getItem('user_id')
       $log.info('user',$rootScope.user)
       return $rootScope.user
-      // if(localStorage.getItem('toke  n')) {
-      //   $log.info('checking for token....')
-      //   const config = {
-      //     headers: {
-      //       authorization: 'Bearer ' + localStorage.getItem('token')
-      //     }
-      //   }
-      //   return $http.get('http://localhost:4000/api/users/me',config)
-      //   .then(function(response) {
-      //     $log.info('from the resolve:',response)
-      //     $log.info(response.data)
-      //     return response.data
-      //     // $state.go('tab.home')
-      //   })
-      //   .catch(function (err) {
-      //     $log.info('there was an error: ',err)
-      //     localStorage.clear();
-      //     $scope.signedIn = false;
-      //     $state.go('home')
-      //      return null;
-      //   })
-      // }
     },
 
     deletePost: function(id) {

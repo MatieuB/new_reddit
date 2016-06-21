@@ -14,8 +14,11 @@
         <span ng-click="changeVotes(post,-1);voteChange(post)" ><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
       </h4</span>
       <p>{{post.description}}</p>
-      <mb-comment></mb-comment>
+      <!-- user.id:{{$root.user.id}} post.user_id:{{post.user_id}} user.name:{{$root.user.name}} -->
+      <button ng-show="$root.user.id == post.user_id" class="text-right btn btn-primary">Edit</button>
+      <button ng-show="$root.user.id == post.user_id" class="text-right btn btn-danger">Delete</button>
 
+      <mb-comment></mb-comment>
 
 </div>
 </div>

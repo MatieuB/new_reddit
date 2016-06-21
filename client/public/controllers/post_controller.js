@@ -1,8 +1,18 @@
 angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','$rootScope','postService',function($scope,$log,$http,$rootScope,postService) {
+$rootScope.user = {}
+  postService.getUser()
+  // $rootScope.user = {}
 
-  postService.getUser();
+$rootScope.user.thing = "shutup"
+    $rootScope.user.name = localStorage.getItem('username');
+    $rootScope.user.id = localStorage.getItem('user_id')
+
+
+
   $log.info('from controller:',$rootScope.user)
+  $log.info('from controller:',$rootScope.user.name)
+  $log.info('from controller:',$rootScope.user.id)
 
 
 
@@ -16,6 +26,7 @@ angular.module('Reddit')
   $scope.voteChange = function(post){
     // $log.info('arrow clicked!');
     // post.votes +=changeVal
+    $log.info('post:::::',post)
     postService.changeVotes(post).then(function(data){
       $log.info('data from votechange pstctrl: ',data)
     })

@@ -8,15 +8,18 @@ angular.module('Reddit')
     restrict: 'EA',
     replace: true,
     templateUrl: '/directives/headers/header.html',
-    controller: function($scope,$log,$http,$window) {
+    controller: function($scope,$rootScope,$log,$http,$window) {
       if(localStorage.getItem('token')){
         $scope.signedIn = true
       } else {
         localStorage.clear();
         $scope.signedIn = false;
       }
+      $rootScope.user = {}
       if(localStorage.getItem('username')){
-        $scope.userName = localStorage.getItem('username')
+
+        $rootScope.user.userName = localStorage.getItem('username');
+        $rootScope.user.id = localStorage.getItem('user_id')
       } else {
         $scope.signedIn = false;
       }
@@ -28,7 +31,9 @@ angular.module('Reddit')
           localStorage.setItem('username',response.data.username);
           localStorage.setItem('user_id',response.data.id);
 
-          $scope.userName = localStorage.getItem('username')
+          $rootScope.user.userName = localStorage.getItem('username');
+          $rootScope.user.id = localStorage.getItem('user_id')
+
           $scope.signedIn = true;
 
         })
@@ -40,7 +45,9 @@ angular.module('Reddit')
             localStorage.setItem('token',response.data.token)
             localStorage.setItem('username',response.data.username)
             localStorage.setItem('user_id',response.data.id);
-            $scope.userName = localStorage.getItem('username')
+            $rootScope.user.name = localStorage.getItem('username');
+            $rootScope.user.id = localStorage.getItem('user_id')
+
             $scope.signedIn = true;
           } else {
             $scope.message = 'Invalid email or password'
@@ -50,6 +57,8 @@ angular.module('Reddit')
       $scope.logOut = function(){
         localStorage.clear()
         $scope.signedIn = false;
+        $rootScope.user = {}
+
       }
       $log.info('signedIn: ',$scope.signedIn)
 
