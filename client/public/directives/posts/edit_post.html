@@ -1,18 +1,14 @@
 Editing: {{post.title}}  ID: {{post.id}}
-<form name='edit_form'  ng-submit="submitEdit()" class='form-group'>
-  <label for="">Title</label>
-  <input name='title' type="text"  ng-model="post.title">
-  <label for="">Image URL</label>
-  <input name='image_url' type="text"  ng-model="post.image_url">
-  <label for="">Descrition</label>
-  <textarea name='description' type="text"  ng-model="post.description">
 
-  <input class="btn btn-primary"type="submit">
-<a ui-sref="home" class="btn btn-info">Cancel</a>
+<div class="col-md-4">
+  <form name='edit_form' class='form-group'>
+    <label  for="">Title</label>
+    <input class="form-control" name='title' type="text"  ng-model="post.title">
+    <label for="">Image URL</label>
+    <input class="form-control" name='image_url' type="text"  ng-model="post.image_url">
+    <label  for="">Description</label>
+    <textarea class="form-control" name='description' type="text"  ng-model="post.description"></textarea>
 </form>
-<!-- <div class="text-center">
-  <h1>{{post.title}}</h1>
-  <h1>{{post.image_url}}</h1>
-  <h1>{{post.description}}</h1>
-  <img ng-src="{{post.image_url}}" alt="post"/>
-</div> -->
+<button class="btn btn-primary"ng-click="submitEdit()">Submit</button>
+<a ui-sref="home" class="btn btn-info">Cancel</a>
+</div>

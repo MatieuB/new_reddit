@@ -4,13 +4,13 @@ angular.module('Reddit')
   postService.all().then(function(response) {
     $rootScope.view.posts = response.data;
   });
-  $rootScope.user = {}
   $rootScope.view ={}
   // $rootScope.view.posts =[]
   postService.getUser()
   // $rootScope.user = {}
 
 
+  $rootScope.user = {}
   $rootScope.user.name = localStorage.getItem('username');
   $rootScope.user.id = localStorage.getItem('user_id')
 

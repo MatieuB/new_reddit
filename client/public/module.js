@@ -53,7 +53,9 @@
             $state.go('home')
           }
         });
-
+        $rootScope.user = {}
+        $rootScope.user.name = localStorage.getItem('username');
+        $rootScope.user.id = localStorage.getItem('user_id')
         $log.info('currentUser:',currentUser)
         $scope.submitEdit = function(){
           $rootScope.view.posts[Number($rootScope.post.id)-1] = $rootScope.post
@@ -90,7 +92,7 @@
     $rootScope.$on('$stateChangeStart',
     function(event, toState, toParams, fromState, fromParams, options){
       // event.preventDefault();
-      if(toState.protected && $rootScope.user.id == null) {
+      if(toState.protected && !$rootScope.user.id ) {
         console.log("requires login dude!!!");
         // const LoginError = "Please Login!"
         $state.go('home')
