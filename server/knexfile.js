@@ -3,7 +3,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/reddit'
+    connection: process.env.DATABASE_URL
   },
   seeds: {
     directory: '/seeds/'
