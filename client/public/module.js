@@ -9,21 +9,51 @@
 
     $stateProvider
 
-    // HOME STATES AND NESTED VIEWS ========================================
+    // HOME StAtES AND NEStED VIEWS ========================================
     .state('home', {
       url: '/',
       template: '<mb-posts></mb-post>'
-
     })
     .state('edit',{
       url:'/edit/:id',
       templateUrl: '/directives/posts/edit_post.html',
-      controller: function($scope,$log,$rootScope,$state,$http,$stateParams,postService){
+      protected:true,
+      resolve: {
+        currentUser: function($http,$log,$state) {
+          if(localStorage.getItem('token')) {
+            $log.info('checking for token....')
+            const config = {
+              headers: {
+                authorization: 'Bearer ' + localStorage.getItem('token')
+              }
+            }
+            return $http.get('http://localhost:4000/api/users/me',config)
+            .then(function(response) {
+              $log.info('from the resolve:',response)
+              $log.info(response.data)
+              return response.data
+              $state.go('home')
+            })
+            .catch(function () {
+              $log.info('there was an error')
+              localStorage.clear();
+              $state.go('home')
+              return null;
+            })
+          }
+        }
+      },
+      controller: function($scope,$log,$rootScope,$state,$http,$stateParams,postService,currentUser){
         postService.getPost($stateParams.id).then(function(data){
           $rootScope.post = data.data[0]
           $log.info('RSP',$rootScope.post);
+          if(currentUser.id != $rootScope.post.user_id){
+            $log.info('rejected')
+            $state.go('home')
+          }
         });
 
+        $log.info('currentUser:',currentUser)
         $scope.submitEdit = function(){
           $rootScope.view.posts[Number($rootScope.post.id)-1] = $rootScope.post
           $http.put('http://localhost:4000/api/edit/post/'+$rootScope.post.id,$rootScope.post).then(function(data){
@@ -53,4 +83,17 @@
       }
     };
   })
+  // app.run runs once when the app starts
+  // this improves user experience
+  angular.module('Reddit').run(function ($rootScope,$window, $log,$state) {
+    $rootScope.$on('$stateChangeStart',
+    function(event, toState, toParams, fromState, fromParams, options){
+      // event.preventDefault();
+      if(toState.protected && $rootScope.user.id == null) {
+        console.log("requires login dude!!!");
+        // const LoginError = "Please Login!"
+        $state.go('home')
+      }
+    })
+  });
 }());

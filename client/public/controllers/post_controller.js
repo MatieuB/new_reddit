@@ -10,7 +10,7 @@ angular.module('Reddit')
   postService.getUser()
   // $rootScope.user = {}
 
-  $rootScope.user.thing = "shutup"
+  
   $rootScope.user.name = localStorage.getItem('username');
   $rootScope.user.id = localStorage.getItem('user_id')
 
@@ -54,13 +54,6 @@ angular.module('Reddit')
         $log.info('response from new post: ',response)
         $scope.newPost = {}
       })
-
-      // .then(function(){
-      //   postService.all().then(function(response) {
-      //     $rootScope.view.posts = response.data
-      //     $scope.newPost = {};
-      //   })
-      // });
     }
   }
   $scope.view.posts

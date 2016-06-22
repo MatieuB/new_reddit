@@ -8,7 +8,7 @@ angular.module('Reddit')
     restrict: 'EA',
     replace: true,
     templateUrl: '/directives/headers/header.html',
-    controller: function($scope,$rootScope,$log,$http,$window) {
+    controller: function($scope,$rootScope,$log,$http,$window,$state) {
       if(localStorage.getItem('token')){
         $scope.signedIn = true
       } else {
@@ -58,6 +58,8 @@ angular.module('Reddit')
         localStorage.clear()
         $scope.signedIn = false;
         $rootScope.user = {}
+        $log.info('logout clicked')
+        $state.go('home')
 
       }
       $log.info('signedIn: ',$scope.signedIn)
