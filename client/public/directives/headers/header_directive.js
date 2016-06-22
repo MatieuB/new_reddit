@@ -8,6 +8,10 @@ angular.module('Reddit')
     restrict: 'EA',
     replace: true,
     templateUrl: '/directives/headers/header.html',
+    // scope: {
+    //   orderVal: '=',
+    //   searchText: '='
+    // },
     controller: function($scope,$rootScope,$log,$http,$window,$state) {
       if(localStorage.getItem('token')){
         $scope.signedIn = true

@@ -10,7 +10,7 @@ angular.module('Reddit')
   postService.getUser()
   // $rootScope.user = {}
 
-  
+
   $rootScope.user.name = localStorage.getItem('username');
   $rootScope.user.id = localStorage.getItem('user_id')
 
@@ -47,11 +47,10 @@ angular.module('Reddit')
       alert('Please login to make a post')
     } else {
       $rootScope.view.posts.push($scope.newPost)
-      // var postCopy = angular.copy($scope.newPost)
-      // $log.info('post: ',postCopy)
-      // $rootScope.view.posts.push(postCopy)
       postService.newPost($scope.newPost).then(function(response){
         $log.info('response from new post: ',response)
+        $('#postModal').modal('hide');
+        $('.modal-backdrop').remove();
         $scope.newPost = {}
       })
     }

@@ -12,7 +12,8 @@
     // HOME StAtES AND NEStED VIEWS ========================================
     .state('home', {
       url: '/',
-      template: '<mb-posts></mb-post>'
+      template: '<mb-posts></mb-post>',
+      filters:'<mb-header></mb-header>'
     })
     .state('edit',{
       url:'/edit/:id',

@@ -9,9 +9,11 @@ angular.module('Reddit')
     } else {
       $scope.newComment.post_id = this.post.id;
       var commentCopy = angular.copy($scope.newComment);
-      // post.comments.push(commentCopy);
-      postService.newComment(commentCopy).then(function(response){
+      post.comments.push($scope.newComment);
+      postService.newComment($scope.newComment).then(function(response){
         $log.info(response)
+        $('#commentModal_'+post.id).modal('hide');
+        $('.modal-backdrop').remove();
 
       }).then(function(){
         postService.all().then(function(response) {

@@ -18,25 +18,27 @@
         <ul class="nav navbar-nav">
           <!-- Medium modal -->
           <li ng-click="addPost()" data-toggle="modal" data-target="#postModal"><a href="#">+ NEW POST <span class="sr-only">(current)</span></a></li>
-          <!-- <select ng-click="logOrderVal()" ng-model="orderVal">
-          <option value="title">Title</option>
-          <option value="author">Author</option>
-          <option value="vote">Votes</option>
-          <option value="date">Date</option>
-        </select> -->
-        <li class="dropdown">
+
+        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By<span class="caret"></span></a>
-          <ul class="dropdown-menu" ng-model="view.orderVal" ng-click="logOrderVal()">
+          <ul class="dropdown-menu" ng-model="orderVal" ng-click="logOrderVal()">
             <li><a value="title" href="#">Title</a></li>
-            <li><a value="author" href="#">Author</a></li>
-            <li><a value="vote" href="#">Votes</a></li>
-            <li><a value="date" href="#">Date</a></li>
+            <li><a value="username" href="#">Author</a></li>
+            <li><a value="votes" href="#">Votes</a></li>
+             <li><a value="date" href="#">Date</a></li>
           </ul>
-        </li>
+        </li> -->
       </ul>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" ng-model="searchText" placeholder="Search">
+          Order by:
+          <select ng-click="logOrderVal()" ng-model="orderVal" class="form-control">
+          <option value="title">Title</option>
+          <option value="username">Author</option>
+          <option value="votes">Votes</option>
+          <!-- <option value="date">Date</option> -->
+        </select>
         </div>
       </form>
       <div ng-show="signedIn == false"class="nav navbar-form navbar-right">
