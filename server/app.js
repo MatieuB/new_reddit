@@ -12,7 +12,11 @@ var routes = require('./routes/api');
 
 
 var app = express();
-app.use(cors());
+app.use(cors({
+	allowedOrigins: [
+		'github.com', 'google.com','https://post-mon.firebaseapp.com'
+	]
+}))
 
 
 

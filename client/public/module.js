@@ -29,8 +29,8 @@
                 authorization: 'Bearer ' + localStorage.getItem('token')
               }
             }
-            console.log('config:'config);
-            return $http.get('https://mbredclone.herokuapp.com/api/users/me',config)
+            console.log('config:',config);
+            return  $http.get('https://mbredclone.herokuapp.com/api/users/me',config)
             .then(function(response) {
               $log.info('from the resolve:',response)
               $log.info(response.data)
