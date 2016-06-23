@@ -1,5 +1,6 @@
 angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','postService',function($scope,$log,$http,postService) {
+  var apiUrl = $rootScope.apiUrl
   // $log.info('currentUser: ', currentUser)
   $scope.voteChange = function() {
     $log.info('vote thing clicked');
@@ -25,7 +26,7 @@ angular.module('Reddit')
     } else {
       var postCopy = angular.copy($scope.newPost)
       $log.info('post: ',postCopy)
-      $http.post('http://localhost:4000/api/posts/add',postCopy).then(function(response){
+      $http.post($rootScope.apiUrl+'api/posts/add',$scope.newPost).then(function(response){
         $log.info('response from new post: ',response)
       }).then(function(){
         postService.all().then(function(response) {
@@ -35,27 +36,4 @@ angular.module('Reddit')
       });
     }
   }
-
-  // $scope.newComment = {}
-  // $scope.newComment.user_id = function(){
-  //   return Number(localStorage.getItem('user_id'))
-  // }
-  //
-  // $scope.submitComment = function(post){
-  //   if(!localStorage.getItem ('token')){
-  //     alert('Please login to make a comment')
-  //   } else {
-  //     $scope.newComment.post_id = post.id
-  //     var commentCopy = angular.copy($scope.newComment)
-  //     postService.newComment(commentCopy).then(function(response){
-  //       $log.info(response)
-  //     })
-  //   }
-  // }
-  // $scope.toggleComments = function(post) {
-  //   $log.info('post: ',post)
-  //   $log.info('showComments========== ',post.showComments)
-  //   return post.showComments = !post.showComments
-  // }
-
 }])

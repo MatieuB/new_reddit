@@ -3,6 +3,7 @@ angular.module('Reddit')
   $scope.newComment = {}
   $scope.newComment.user_id = Number(localStorage.getItem('user_id'))
 
+
   $scope.submitComment = function(post) {
     if(!localStorage.getItem ('token')){
       alert('Please login to make a comment')
