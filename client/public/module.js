@@ -29,7 +29,8 @@
                 authorization: 'Bearer ' + localStorage.getItem('token')
               }
             }
-            return $http.get(apiUrl+'api/users/me',config)
+            console.log('config:'config);
+            return $http.get('https://mbredclone.herokuapp.com/api/users/me',config)
             .then(function(response) {
               $log.info('from the resolve:',response)
               $log.info(response.data)
@@ -54,15 +55,15 @@
             $state.go('home')
           }
         });
-        $rootScope.apiUrl = 'https://mbredclone.herokuapp.com/'|| "http://localhost:4000/" 
-        var apiUrl = $rootScope.urlApi;
+        $rootScope.apiUrl = 'https://mbredclone.herokuapp.com/'|| "http://localhost:4000/"
+
         $rootScope.user = {}
         $rootScope.user.name = localStorage.getItem('username');
         $rootScope.user.id = localStorage.getItem('user_id')
         $log.info('currentUser:',currentUser)
         $scope.submitEdit = function(){
           $rootScope.view.posts[Number($rootScope.post.id)-1] = $rootScope.post
-          $http.put(apiUrl+'api/edit/post/'+$rootScope.post.id,$rootScope.post).then(function(data){
+          $http.put($rootScope.apiUrl+'api/edit/post/'+$rootScope.post.id,$rootScope.post).then(function(data){
             $log.info('data from edit:',data)
             postService.all().then(function(response){
               $rootScope.view.post = response.data
