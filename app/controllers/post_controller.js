@@ -1,7 +1,7 @@
 angular.module('Reddit')
 .controller('PostCtrl',['$scope','$log','$http','postService',function($scope,$log,$http,postService) {
-  var apiUrl = $rootScope.apiUrl
-  // $log.info('currentUser: ', currentUser)
+  // var apiUrl = $rootScope.apiUrl
+  $rootScope.view={};
   $scope.voteChange = function() {
     $log.info('vote thing clicked');
     alert('connected!');
@@ -14,7 +14,7 @@ angular.module('Reddit')
   $scope.newPost = {};
   $scope.post = {}
   postService.all().then(function(response) {
-    $scope.view.posts = response.data;
+    $rootScope.view.posts = response.data;
   });
   $scope.newPost.showComments = false;
   $scope.newPost.votes = 0;
@@ -26,11 +26,11 @@ angular.module('Reddit')
     } else {
       var postCopy = angular.copy($scope.newPost)
       $log.info('post: ',postCopy)
-      $http.post($rootScope.apiUrl+'api/posts/add',$scope.newPost).then(function(response){
+      $http.post('/api/posts/add',$scope.newPost).then(function(response){
         $log.info('response from new post: ',response)
       }).then(function(){
         postService.all().then(function(response) {
-          $scope.view.posts = response.data
+          $rootScope.view.posts = response.data
           $scope.newPost = {};
         })
       });

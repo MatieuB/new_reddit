@@ -15,7 +15,7 @@
       template: '<mb-posts></mb-post>',
       resolve: {
         currentUser: function($http,$log,$state,$rootScope) {
-          var apiUrl = $rootScope.apiUrl
+
           if(localStorage.getItem('token')) {
             $log.info('checking for token....')
             const config = {
@@ -23,7 +23,7 @@
                 authorization: 'Bearer ' + localStorage.getItem('token')
               }
             }
-            return $http.get(apiUrl+'api/users/me',config)
+            return $http.get('/api/users/me',config)
             .then(function(response) {
               $log.info('from the resolve:',response)
               $log.info(response.data)
